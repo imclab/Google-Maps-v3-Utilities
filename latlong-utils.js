@@ -1,5 +1,5 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	This is Google Maps V3 port of Chris Veness awesome LatLong library
+	This is a Google Maps V3 port of Chris Veness awesome LatLong library
 	the original script can be found here www.movable-type.co.uk/scripts/latlong.html
 */
 
