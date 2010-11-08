@@ -52,7 +52,6 @@
 
 					},
 
-				    //traditional test names
 					'It should be 0': function () {
 
 						var point1 = new google.maps.LatLng(0,0),
@@ -60,8 +59,6 @@
 
 						var bearing = GoogleMapsV3_LatLon_Utils.calcBearingTo(point1, point2);
 						
-						console.log(bearing);
-
 						Y.Assert.areEqual(0, bearing);
 				    },
 
