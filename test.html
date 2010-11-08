@@ -43,7 +43,43 @@
 
 				});
 
+
+				var testBearingTo = new Y.Test.Case({
+
+				    name: "Test calcBearingTo",
+
+					setUp: function () {
+
+					},
+
+				    //traditional test names
+					'It should be 0': function () {
+
+						var point1 = new google.maps.LatLng(0,0),
+							point2 = new google.maps.LatLng(0,0);
+
+						var bearing = GoogleMapsV3_LatLon_Utils.calcBearingTo(point1, point2);
+						
+						console.log(bearing);
+
+						Y.Assert.areEqual(0, bearing);
+				    },
+
+					'It should be 255 deg': function () {
+					
+						var point1 = new google.maps.LatLng(35.6894875, 139.6917064),
+							point2 = new google.maps.LatLng(34.6937378, 135.5021651);
+					
+						var bearing = GoogleMapsV3_LatLon_Utils.calcBearingTo(point1, point2);
+					
+						Y.Assert.areEqual(255, Math.round(bearing));
+					}
+
+				});
+
+
 				Y.Test.Runner.add(testDistance);
+				Y.Test.Runner.add(testBearingTo);
 
 				Y.Test.Runner.run();
 

@@ -1,3 +1,8 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	This is Google Maps V3 port of Chris Veness awesome LatLong library
+	the original script can be found here www.movable-type.co.uk/scripts/latlong.html
+*/
+
 
 GoogleMapsV3_LatLon_Utils = (function () {
 
@@ -8,16 +13,18 @@ GoogleMapsV3_LatLon_Utils = (function () {
 	    return value * Math.PI / 180;
 	}
 
+	function toDeg(value) {
+		return value * 180 / Math.PI;
+	}
+
+
 	/**
-	 * Returns the distance from this point to the supplied point, in km
+	 * Returns the distance between two points, in km
 	 * (using Haversine formula)
 	 *
 	 * from: Haversine formula - R. W. Sinnott, "Virtues of the Haversine",
 	 *       Sky and Telescope, vol 68, no 2, 1984
 	 *
-	 * @param   {LatLon} point: Latitude/longitude of destination point
-	 * @param   {Number} [precision=4]: no of significant digits to use for returned value
-	 * @returns {Number} Distance in km between this point and destination point
 	 */
 	function calcDistance(point1, point2, precision) {
 
@@ -38,7 +45,28 @@ GoogleMapsV3_LatLon_Utils = (function () {
 	  return d;
 	}
 
-	return {
-		calcDistance: calcDistance
+
+	/**
+	 * Returns the (initial) bearing between two points, in degrees
+	 *   see http://williams.best.vwh.net/avform.htm#Crs
+	 *
+	 */
+	function calcBearingTo(point1, point2) {
+
+	  var lat1 = toRad(point1.lat()),
+	  	  lat2 = toRad(point2.lat()),
+		  dLng = toRad(point2.lng()-point1.lng());
+
+	  var y = Math.sin(dLng) * Math.cos(lat2),
+	  		  x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLng),
+	  		  brng = Math.atan2(y, x);
+
+	  return (toDeg(brng) + 360) % 360;
 	}
+
+
+	return {
+		calcDistance: calcDistance,
+		calcBearingTo: calcBearingTo
+	};
 }());
