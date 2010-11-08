@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script src="latlong-utils.js"></script>
+	</head>
+
+	<body>
+		<script>
+
+
+			YUI().use('test', function(Y) {
+
+				var testDistance = new Y.Test.Case({
+
+				    name: "Test calcDistance",
+
+					setUp: function () {
+
+					},
+
+				    //traditional test names
+					'It should be 0': function () {
+
+						var point1 = new google.maps.LatLng(0,0),
+							point2 = new google.maps.LatLng(0,0);
+
+						var dist = GoogleMapsV3_LatLon_Utils.calcDistance(point1, point2);
+
+						Y.Assert.areEqual(0, dist);
+				    },
+
+					'It should be 396 km': function () {
+
+						var point1 = new google.maps.LatLng(35.6894875, 139.6917064),
+							point2 = new google.maps.LatLng(34.6937378, 135.5021651);
+
+						var dist = GoogleMapsV3_LatLon_Utils.calcDistance(point1, point2);
+
+						Y.Assert.areEqual(396, Math.round(dist));
+					}
+
+				});
+
+				Y.Test.Runner.add(testDistance);
+
+				Y.Test.Runner.run();
+
+			});
+
+		</script>
+	</body>
+</html>
